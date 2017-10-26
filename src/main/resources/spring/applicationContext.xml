@@ -83,19 +83,18 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--mybatis分页插件-->
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="configLocation" value="classpath:spring/mybatis-config.xml"/>
         <!-- 自动扫描*mapper.xml文件 -->
         <property name="mapperLocations">
             <array>
                 <value>classpath:mapper/*.xml</value>
-                <value>classpath:mapper/extra/*.xml</value>
             </array>
         </property>
     </bean>
 
     <!-- mapper扫描器 -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.artisan.dao.*"/>
+        <property name="basePackage" value="com.artisan.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="markerInterface" value="com.artisan.common.utils.MyMapper"/>
     </bean>

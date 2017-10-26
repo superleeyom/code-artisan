@@ -1,7 +1,11 @@
 package com.artisan.common.aspect;
 
 import com.artisan.authorization.manager.TokenManager;
+import com.artisan.authorization.model.TokenModel;
 import com.artisan.common.annotation.IgnoreSecurity;
+import com.artisan.common.constant.Constants;
+import com.artisan.common.exception.TokenException;
+import com.artisan.common.utils.WebContextUtil;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -35,7 +39,7 @@ public class SecurityAspect {
         LOGGER.debug("Method : " + method.getName() + " : " + method.isAnnotationPresent(IgnoreSecurity.class));
 
         //如果是获取Swagger API文档，直接调用目标方法，生产环境下需要注释掉
-        /*String methodName = method.getName();
+        String methodName = method.getName();
         if ("getDocumentation".equals(methodName)) {
             return pjp.proceed();
         }
@@ -53,7 +57,7 @@ public class SecurityAspect {
             String message = "token " + authentication + " is invalid！！！";
             LOGGER.debug("message : " + message);
             throw new TokenException(message);
-        }*/
+        }
         // 调用目标方法
         return pjp.proceed();
     }

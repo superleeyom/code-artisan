@@ -9,7 +9,7 @@ import java.util.List;
  * @author leeyom
  */
 @Service
-public interface BaseService<T> {
+public interface IBaseService<T> {
 
     int deleteByPrimaryKey(Integer id);
 

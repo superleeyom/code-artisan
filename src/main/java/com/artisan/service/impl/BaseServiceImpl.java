@@ -1,15 +1,17 @@
-package com.leaderment.service.impl;
+package com.artisan.service.impl;
 
-import com.leaderment.service.BaseService;
+import com.artisan.service.IBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
 /**
- * Created by leeyom on 2017/10/13.
+ * 通用的BaseService实现类
+ * @author Leeyom Wang
+ * @date 2017年10月26日 12:04
  */
-public abstract class BaseServiceImpl<T> implements BaseService<T> {
+public abstract class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Autowired
     protected Mapper<T> mapper;

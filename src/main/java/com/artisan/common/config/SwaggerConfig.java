@@ -31,9 +31,6 @@ public class SwaggerConfig {
     private ApiInfo buildApiInfo() {
         return new ApiInfoBuilder()
                 .title("代码工匠平台API接口")
-                .termsOfServiceUrl("http://leeyom.top")
-                .description("代码工匠平台API接口文档")
-                .contact(new Contact("Leeyom Wang", "http://leeyom.top", "leeyomwang@163.com"))
                 .build();
     }
 }
