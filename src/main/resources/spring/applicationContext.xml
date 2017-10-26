@@ -14,8 +14,7 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:jdbc.properties</value>
-                <value>classpath:redisConfig.properties</value>
+                <value>classpath:config.properties</value>
             </list>
         </property>
     </bean>
@@ -95,9 +94,10 @@
     </bean>
 
     <!-- mapper扫描器 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.artisan.dao"/>
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.artisan.dao.*"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="markerInterface" value="com.artisan.common.utils.MyMapper"/>
     </bean>
 
     <!-- 事务管理 -->
