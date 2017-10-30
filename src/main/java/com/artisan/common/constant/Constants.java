@@ -21,4 +21,9 @@ public class Constants {
      * 存放Token的header字段
      */
     public static final String DEFAULT_TOKEN_NAME = "Access-Token";
+
+    /**
+     * 存放时间戳的header字段
+     */
+    public static final String TIME_STAMP = "timestamp";
 }

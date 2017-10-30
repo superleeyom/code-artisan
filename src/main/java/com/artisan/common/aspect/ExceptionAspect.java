@@ -81,13 +81,13 @@ public class ExceptionAspect {
     }
 
     /**
-     * 500 - Internal Server Error
+     * 401 - Internal Server Error
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(TokenException.class)
     public ResultBean handleTokenException(Exception e) {
         ResultBean resultBean = new ResultBean();
-        resultBean.setCode(500);
+        resultBean.setCode(401);
         resultBean.setMsg("Token is invaild...");
         log.error("Token is invaild...", e);
         return resultBean;

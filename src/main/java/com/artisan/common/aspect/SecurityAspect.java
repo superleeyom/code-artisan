@@ -5,6 +5,7 @@ import com.artisan.authorization.model.TokenModel;
 import com.artisan.common.annotation.IgnoreSecurity;
 import com.artisan.common.constant.Constants;
 import com.artisan.common.exception.TokenException;
+import com.artisan.common.utils.Base64Util;
 import com.artisan.common.utils.WebContextUtil;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -15,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * token有效性判断切面
@@ -26,6 +30,7 @@ import java.lang.reflect.Method;
 public class SecurityAspect {
 
     private static final Logger LOGGER = Logger.getLogger(SecurityAspect.class);
+    private final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMddHHmmss");
 
     @Autowired
     TokenManager tokenManager;
@@ -51,10 +56,25 @@ public class SecurityAspect {
 
         // 从 request header 中获取当前 token
         String authentication = WebContextUtil.getRequest().getHeader(Constants.DEFAULT_TOKEN_NAME);
-        TokenModel tokenModel = tokenManager.getToken(authentication);
+        // 从 request header 中获取时间戳
+        String timestampStr = WebContextUtil.getRequest().getHeader(Constants.TIME_STAMP);
+        TokenModel tokenModel = tokenManager.getToken(Base64Util.decodeData(authentication));
+
+        Date date = new Date();
+        Date timestamp = SDF.parse(timestampStr);
+
+        //验证时间戳是否超过五分钟，如果超过五分钟，则服务端删除此token，防止抓包
+        if (((date.getTime()) - timestamp.getTime()) / 60000 > 5) {
+            //删除token
+            tokenManager.deleteToken(tokenModel.getUserId());
+            String message = "token " + Base64Util.decodeData(authentication) + " is invalid！！！";
+            LOGGER.debug("message : " + message);
+            throw new TokenException(message);
+        }
+
         // 检查 token 有效性
         if (!tokenManager.checkToken(tokenModel)) {
-            String message = "token " + authentication + " is invalid！！！";
+            String message = "token " + Base64Util.decodeData(authentication) + " is invalid！！！";
             LOGGER.debug("message : " + message);
             throw new TokenException(message);
         }

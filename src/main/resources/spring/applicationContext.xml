@@ -59,6 +59,7 @@
         <property name="hostName" value="${redis.host}"/>
         <property name="port" value="${redis.port}"/>
         <property name="poolConfig" ref="jedisPoolConfig"/>
+        <!--如果redis没有设置密码，此行需要注释，否则会报Caused by: redis.clients.jedis.exceptions.JedisDataException: ERR Client sen 异常-->
         <property name="password" value="${redis.password}"/>
         <property name="usePool" value="true"/>
     </bean>

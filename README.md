@@ -18,8 +18,8 @@
 - [x] CORS跨域请求处理
 - [x] JWT鉴权机制
 - [x] 集成Swagger2，自动生成restful api文档
-- [ ] Hibernate Vilation参数校验机制
 - [x] 集成通用Mapper、pagehelper
-- [ ] 单点登录，采用redis进行session共享
+- [x] 单点登录，采用JWT实现
+- [ ] Hibernate Vilation参数校验机制
 - [ ] shiro权限控制
 

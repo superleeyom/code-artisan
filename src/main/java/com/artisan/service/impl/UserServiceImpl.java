@@ -17,4 +17,14 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
     @Autowired
     UserMapper userMapper;
 
+    /**
+     * 根据用户名和密码获取用户信息
+     * @param userName
+     * @param password
+     * @return
+     */
+    @Override
+    public User getUser(String userName, String password) {
+        return userMapper.getUser(userName,password);
+    }
 }

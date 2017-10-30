@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.artisan.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.artisan.pojo.db.User" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="u_id" property="uId" jdbcType="INTEGER" />
-    <result column="u_name" property="uName" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="birthday" property="birthday" jdbcType="DATE" />
-    <result column="sex" property="sex" jdbcType="INTEGER" />
-    <result column="age" property="age" jdbcType="INTEGER" />
-  </resultMap>
+<mapper namespace="com.artisan.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.artisan.pojo.db.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="u_id" property="uId" jdbcType="INTEGER"/>
+        <result column="u_name" property="uName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--根据用户名和密码获取用户信息-->
+    <select id="getUser" resultMap="BaseResultMap">
+        select *
+        from t_user WHERE u_name = #{userName} AND password = #{password}
+    </select>
+
+
 </mapper>

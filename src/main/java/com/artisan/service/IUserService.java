@@ -9,4 +9,11 @@ import com.artisan.pojo.db.User;
  */
 public interface IUserService extends IBaseService<User> {
 
+    /**
+     * 根据用户名和密码获取用户信息
+     * @param userName
+     * @param password
+     * @return
+     */
+    User getUser(String userName, String password);
 }

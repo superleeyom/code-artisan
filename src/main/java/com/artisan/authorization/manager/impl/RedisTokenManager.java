@@ -3,11 +3,15 @@ package com.artisan.authorization.manager.impl;
 import com.artisan.authorization.manager.TokenManager;
 import com.artisan.authorization.model.TokenModel;
 import com.artisan.common.constant.Constants;
+import com.artisan.common.utils.Base64Util;
+import com.artisan.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisTokenManager implements TokenManager {
 
     private RedisTemplate<Long, String> redis;
+    private final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMddHHmmss");
 
     @Autowired
     public void setRedis(RedisTemplate redis) {
@@ -31,11 +36,15 @@ public class RedisTokenManager implements TokenManager {
 
     @Override
     public TokenModel createToken(long userId) {
-        //使用uuid作为源token
-        String token = UUID.randomUUID().toString().replace("-", "");
-        TokenModel model = new TokenModel(userId, token);
-        //存储到redis并设置过期时间(有效期为72个小时)
-        redis.boundValueOps(userId).set(token, Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
+        //uuid
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        //时间戳
+        String timestamp = SDF.format(new Date());
+        //token => userId_timestamp_uuid;
+        String token = userId + "_" + timestamp + "_" + uuid;
+        TokenModel model = new TokenModel(userId, uuid, timestamp);
+        //存储到redis并设置过期时间(有效期为2个小时)
+        redis.boundValueOps(userId).set(Base64Util.encodeData(token), Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
         return model;
     }
 
@@ -45,13 +54,14 @@ public class RedisTokenManager implements TokenManager {
             return null;
         }
         String[] param = authentication.split("_");
-        if (param.length != 2) {
+        if (param.length != 3) {
             return null;
         }
         //使用userId和源token简单拼接成的token，可以增加加密措施
         long userId = Long.parseLong(param[0]);
-        String token = param[1];
-        return new TokenModel(userId, token);
+        String timestamp = param[1];
+        String uuid = param[2];
+        return new TokenModel(userId, uuid, timestamp);
     }
 
     @Override
@@ -60,10 +70,10 @@ public class RedisTokenManager implements TokenManager {
             return false;
         }
         String token = redis.boundValueOps(model.getUserId()).get();
-        if (token == null || !token.equals(model.getToken())) {
+        if (token == null || !(Base64Util.decodeData(token)).equals(model.getToken())) {
             return false;
         }
-        //如果验证成功，说明此用户进行了一次有效操作，延长token的过期时间
+        //如果验证成功，说明此用户进行了一次有效操作，延长token的过期时间(2个小时)
         redis.boundValueOps(model.getUserId()).expire(Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
         return true;
     }
@@ -72,4 +82,16 @@ public class RedisTokenManager implements TokenManager {
     public void deleteToken(long userId) {
         redis.delete(userId);
     }
+
+    @Override
+    public boolean hasToken(long userId) {
+        String token = redis.boundValueOps(userId).get();
+        if (StringUtils.notNull(token)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

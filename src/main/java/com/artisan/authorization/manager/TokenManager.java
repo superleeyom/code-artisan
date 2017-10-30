@@ -14,26 +14,32 @@ public interface TokenManager {
      * @param userId 指定用户的id
      * @return 生成的token
      */
-    public TokenModel createToken(long userId);
+    TokenModel createToken(long userId);
 
     /**
      * 检查token是否有效
      * @param model token
      * @return 是否有效
      */
-    public boolean checkToken(TokenModel model);
+    boolean checkToken(TokenModel model);
 
     /**
      * 从字符串中解析token
      * @param authentication 加密后的字符串
      * @return
      */
-    public TokenModel getToken(String authentication);
+    TokenModel getToken(String authentication);
 
     /**
      * 清除token
      * @param userId 登录用户的id
      */
-    public void deleteToken(long userId);
+    void deleteToken(long userId);
 
+    /**
+     * 保证一个用户在一个时间段只有一个可用 Token
+     * @param userId
+     * @return
+     */
+    boolean hasToken(long userId);
 }

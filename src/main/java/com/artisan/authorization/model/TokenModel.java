@@ -15,11 +15,17 @@ public class TokenModel {
     /**
      * 随机生成的uuid
      */
-    private String token;
+    private String uuid;
 
-    public TokenModel(long userId, String token) {
+    /**
+     * 时间戳
+     */
+    private String timestamp;
+
+    public TokenModel(long userId, String uuid, String timestamp) {
         this.userId = userId;
-        this.token = token;
+        this.uuid = uuid;
+        this.timestamp = timestamp;
     }
 
     public long getUserId() {
@@ -30,11 +36,23 @@ public class TokenModel {
         this.userId = userId;
     }
 
-    public String getToken() {
-        return token;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getToken() {
+        return userId + "_" + timestamp + "_" + uuid;
     }
 }

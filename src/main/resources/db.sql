@@ -1,17 +1,10 @@
-/*
-SQLyog 企业版 - MySQL GUI v8.14 
-MySQL - 5.7.12-log 
-*********************************************************************
-*/
-/*!40101 SET NAMES utf8 */;
-
 create table `t_user` (
-	`u_id` double ,
+	`u_id` INTEGER,
 	`u_name` varchar (300),
 	`password` varchar (300),
 	`birthday` date ,
-	`sex` double ,
-	`age` double 
+	`sex` INTEGER ,
+	`age` INTEGER 
 ); 
 insert into `t_user` (`u_id`, `u_name`, `password`, `birthday`, `sex`, `age`) values('1','leeyom','123','1993-08-26','1','24');
 insert into `t_user` (`u_id`, `u_name`, `password`, `birthday`, `sex`, `age`) values('2','Tom','5566','1995-01-01','1','18');
