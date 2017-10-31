@@ -20,6 +20,6 @@
 - [x] 集成Swagger2，自动生成restful api文档
 - [x] 集成通用Mapper、pagehelper
 - [x] 单点登录，采用JWT实现
-- [ ] Hibernate Vilation参数校验机制
+- [x] Hibernate Vilation参数校验机制
 - [ ] shiro权限控制
 

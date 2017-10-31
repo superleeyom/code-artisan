@@ -16,16 +16,18 @@
             <version>4.9</version>
             <scope>test</scope>
         </dependency>
-        <!--servlet、jsp-->
+        <!--servlet-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
             <version>2.3.1</version>
+            <scope>provided</scope>
         </dependency>
         <!--spring支持-->
         <dependency>
@@ -35,7 +37,27 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
         <dependency>
@@ -54,19 +76,9 @@
             <version>4.1.6.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.18.1-GA</version>
-        </dependency>
-        <dependency>
-            <groupId>asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>3.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-            <version>2.2</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.1.6.RELEASE</version>
         </dependency>
         <!--阿里巴巴德鲁伊数据库连接池-->
         <dependency>
@@ -189,7 +201,7 @@
             <artifactId>spring-data-redis</artifactId>
             <version>1.6.0.RELEASE</version>
         </dependency>
-        <!-- aspectj AOP -->
+        <!-- AOP -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
@@ -212,8 +224,13 @@
             <artifactId>pagehelper</artifactId>
             <version>4.1.4</version>
         </dependency>
+        <!--Hibernate Validator-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.4.Final</version>
+        </dependency>
     </dependencies>
-
 
     <build>
         <finalName>bison-inventory</finalName>

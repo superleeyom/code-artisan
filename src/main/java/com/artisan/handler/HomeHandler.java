@@ -86,7 +86,7 @@ public class HomeHandler extends BaseHandler {
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
             resultBean.setMsg("Login failed, user name or password error！");
-            LOGGER.error("用户登录失败！参数信息：userName = " + userName + ",password = " + password);
+            LOGGER.error("用户登录失败！参数信息：userName = " + userName + ",password = " + password, e);
             e.printStackTrace();
         }
         return resultBean;
@@ -113,7 +113,7 @@ public class HomeHandler extends BaseHandler {
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
             resultBean.setMsg("Logout failed!");
-            LOGGER.error("遇到未知错误，退出失败！");
+            LOGGER.error("遇到未知错误，退出失败！", e);
         }
         return resultBean;
     }

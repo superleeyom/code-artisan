@@ -46,8 +46,6 @@ public class CorsFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         if (StringUtil.isNotEmpty(allowOrigin)) {
             response.setHeader("Access-Control-Allow-Origin", allowOrigin);
-        } else {
-            LOGGER.error("请注意，出现跨域的情况！！！");
         }
 
         if (StringUtil.isNotEmpty(allowMethods)) {

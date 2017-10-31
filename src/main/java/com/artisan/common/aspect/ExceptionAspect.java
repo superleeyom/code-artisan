@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.ValidationException;
+
 
 /**
  * 全局异常处理切面
@@ -47,8 +49,8 @@ public class ExceptionAspect {
     public ResultBean handleValidationException(MethodArgumentNotValidException e) {
         ResultBean resultBean = new ResultBean();
         resultBean.setCode(400);
-        resultBean.setMsg("Parameter validation exception...");
-        log.error("Parameter validation exception...", e);
+        resultBean.setMsg("参数检验异常！");
+        log.error("参数检验异常！", e);
         return resultBean;
     }
 
@@ -61,8 +63,8 @@ public class ExceptionAspect {
     public ResultBean handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         ResultBean resultBean = new ResultBean();
         resultBean.setCode(405);
-        resultBean.setMsg("Request method not supported...");
-        log.error("Request method not supported...", e);
+        resultBean.setMsg("请求方法不支持！");
+        log.error("请求方法不支持！", e);
         return resultBean;
     }
 
@@ -75,8 +77,8 @@ public class ExceptionAspect {
     public ResultBean handleHttpMediaTypeNotSupportedException(Exception e) {
         ResultBean resultBean = new ResultBean();
         resultBean.setCode(415);
-        resultBean.setMsg("Content type not supported...");
-        log.error("Content type not supported...", e);
+        resultBean.setMsg("内容类型不支持！");
+        log.error("内容类型不支持！", e);
         return resultBean;
     }
 
@@ -88,8 +90,8 @@ public class ExceptionAspect {
     public ResultBean handleTokenException(Exception e) {
         ResultBean resultBean = new ResultBean();
         resultBean.setCode(401);
-        resultBean.setMsg("Token is invaild...");
-        log.error("Token is invaild...", e);
+        resultBean.setMsg("Token已失效");
+        log.error("Token已失效", e);
         return resultBean;
     }
 
@@ -101,8 +103,21 @@ public class ExceptionAspect {
     public ResultBean handleException(Exception e) {
         ResultBean resultBean = new ResultBean();
         resultBean.setCode(500);
-        resultBean.setMsg("Internal Server Error...");
-        log.error("Internal Server Error...", e);
+        resultBean.setMsg("内部服务器错误！");
+        log.error("内部服务器错误！", e);
+        return resultBean;
+    }
+
+    /**
+     * 400 - Bad Request
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    public ResultBean handleValidationException(ValidationException e) {
+        ResultBean resultBean = new ResultBean();
+        resultBean.setCode(400);
+        resultBean.setMsg("参数验证失败！");
+        log.error("参数验证失败！", e);
         return resultBean;
     }
 

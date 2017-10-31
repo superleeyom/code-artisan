@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
 @Api(description = "user管理", tags = "UserHandler", basePath = "/users")
 @Controller
 @RequestMapping("/users")
-public class UserHandler extends BaseHandler{
+public class UserHandler extends BaseHandler {
 
     private static final Logger LOGGER = Logger.getLogger(UserHandler.class);
 
@@ -33,7 +34,7 @@ public class UserHandler extends BaseHandler{
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
             resultBean.setMsg("Request User list Failed！");
-            LOGGER.error("查询列表失败！");
+            LOGGER.error("查询列表失败！", e);
         }
         return resultBean;
     }
@@ -52,7 +53,7 @@ public class UserHandler extends BaseHandler{
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
             resultBean.setMsg("Failed to request User details！");
-            LOGGER.error("查询指定的User失败！参数信息：id = " + id);
+            LOGGER.error("查询指定的User失败！参数信息：id = " + id, e);
         }
         return resultBean;
     }
@@ -60,14 +61,14 @@ public class UserHandler extends BaseHandler{
     @ApiOperation(value = "新增User")
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResultBean add(@ApiParam(value = "新增User实体", required = true) @RequestBody User user) {
+    public ResultBean add(@ApiParam(value = "新增User实体", required = true) @RequestBody @Valid User user) {
         ResultBean resultBean = new ResultBean();
         try {
             userService.insert(user);
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
             resultBean.setMsg("Create User Failed！");
-            LOGGER.error("新增User！参数信息：User = " + user.toString());
+            LOGGER.error("新增User！参数信息：User = " + user.toString(), e);
         }
         return resultBean;
     }
@@ -91,7 +92,7 @@ public class UserHandler extends BaseHandler{
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
             resultBean.setMsg("Update User failed！");
-            LOGGER.error("更新失败！参数信息：id = " + id + ",User = " + user.toString());
+            LOGGER.error("更新失败！参数信息：id = " + id + ",User = " + user.toString(), e);
         }
         return resultBean;
     }
@@ -110,7 +111,7 @@ public class UserHandler extends BaseHandler{
             resultBean.setCode(StatusCode.HTTP_FAILURE);
             resultBean.setMsg("Delete User failed！");
             e.printStackTrace();
-            LOGGER.error("删除失败！参数信息：id = " + id);
+            LOGGER.error("删除失败！参数信息：id = " + id, e);
         }
         return resultBean;
     }

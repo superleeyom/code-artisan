@@ -2,6 +2,7 @@ package com.artisan.pojo.db;
 
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Table(name = "t_user")
 public class User {
@@ -17,11 +18,13 @@ public class User {
      * 用户名
      */
     @Column(name = "u_name")
+    @NotEmpty
     private String uName;
 
     /**
      * 密码
      */
+    @NotEmpty
     private String password;
 
     /**
