@@ -30,13 +30,14 @@ import java.util.Date;
 public class SecurityAspect {
 
     private static final Logger LOGGER = Logger.getLogger(SecurityAspect.class);
-    private final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMddHHmmss");
 
     @Autowired
     TokenManager tokenManager;
 
     @Around("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
     public Object execute(ProceedingJoinPoint pjp) throws Throwable {
+        //SimpleDateFormat是线程不安全的，设置为static，多线程情况下会报java.lang.NumberFormatException: multiple points
+        SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMddHHmmss");
         // 从切点上获取目标方法
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         LOGGER.debug("methodSignature : " + methodSignature);
@@ -65,11 +66,11 @@ public class SecurityAspect {
 
         //验证时间戳是否超过五分钟，如果超过五分钟，则服务端删除此token，防止抓包
         if (((date.getTime()) - timestamp.getTime()) / 60000 > 5) {
-            //删除token
-            tokenManager.deleteToken(tokenModel.getUserId());
-            String message = "token " + Base64Util.decodeData(authentication) + " is invalid！！！";
-            LOGGER.debug("message : " + message);
-            throw new TokenException(message);
+            if (tokenModel != null) {
+                //删除token
+                tokenManager.deleteToken(tokenModel.getUserId());
+            }
+            throw new TokenException("请求超时~");
         }
 
         // 检查 token 有效性
