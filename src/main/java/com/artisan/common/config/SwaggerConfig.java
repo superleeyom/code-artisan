@@ -6,7 +6,6 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -16,8 +15,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author leeyom
  * @date 2017年10月19日 10:41
  */
-@EnableSwagger2
+// @Configuration 这里需要注意，如果项目架构是SSM，那就不要加这个注解，如果是 spring boot 架构类型的项目，就必须加上这个注解，让 spring 加载该配置。
+// spring boot 项目不需要添加此注解，SSM 项目需要加上此注解，否则将会报错。
 @EnableWebMvc
+@EnableSwagger2
 public class SwaggerConfig {
     @Bean
     public Docket buildDocket() {
@@ -30,7 +31,7 @@ public class SwaggerConfig {
 
     private ApiInfo buildApiInfo() {
         return new ApiInfoBuilder()
-                .title("代码工匠平台API接口")
+                .title("API接口文档")
                 .build();
     }
 }

@@ -9,15 +9,17 @@
 
     <context:component-scan base-package="com.artisan.*" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
         <!-- 控制器增强，使一个Contoller成为全局的异常处理类，类中用@ExceptionHandler方法注解的方法可以处理所有Controller发生的异常 -->
-        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
     <!-- 支持Controller的AOP代理 -->
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy/>
 
-    <!--使用bean申明可以去掉@configuration-->
+    <!--装配Swagger配置-->
     <bean class="com.artisan.common.config.SwaggerConfig"/>
 
     <!-- 配置文件上传 -->
