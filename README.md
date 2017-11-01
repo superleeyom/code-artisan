@@ -22,4 +22,8 @@
 - [x] 单点登录，采用JWT实现
 - [x] Hibernate Vilation参数校验机制
 - [ ] shiro权限控制
+    - [x] 数据库模型设计(用MySQLWorkbench画ER图踩了一点点坑)
+    - [ ] 配置spring，集成shiro
+    - [ ] 权限管理后台（增删改查）
+    - [ ] 前台界面
 
