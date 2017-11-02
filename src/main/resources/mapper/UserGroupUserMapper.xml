@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.artisan.dao.UserGroupUserMapper" >
+  <resultMap id="BaseResultMap" type="com.artisan.pojo.db.UserGroupUser" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="group_id" property="groupId" jdbcType="INTEGER" />
+    <id column="u_id" property="uId" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.artisan.dao.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.artisan.pojo.db.Menu" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="m_id" property="mId" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="parent_m_id" property="parentMId" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

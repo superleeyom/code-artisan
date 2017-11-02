@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.artisan.dao.FilePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.artisan.pojo.db.FilePermission" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="p_id" property="pId" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

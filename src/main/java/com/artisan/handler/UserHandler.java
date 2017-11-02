@@ -87,7 +87,7 @@ public class UserHandler extends BaseHandler {
             oldUser.setBirthday(user.getBirthday());
             oldUser.setPassword(user.getPassword());
             oldUser.setSex(user.getSex());
-            oldUser.setuName(user.getuName());
+            oldUser.setUserName(user.getUserName());
             userService.updateByPrimaryKey(oldUser);
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);

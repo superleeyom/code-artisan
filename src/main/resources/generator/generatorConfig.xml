@@ -31,8 +31,37 @@
                              type="XMLMAPPER"/>
 
         <!--需要生成的表，与数据库对应，需要在此处配置-->
-        <table tableName="t_user" domainObjectName="User">
+        <table tableName="file" domainObjectName="File">
+            <generatedKey column="f_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="menu" domainObjectName="Menu">
+            <generatedKey column="m_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="operation" domainObjectName="Operation">
+            <generatedKey column="o_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="page" domainObjectName="Page">
+            <generatedKey column="page_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="permission" domainObjectName="Permission">
+            <generatedKey column="p_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="role" domainObjectName="Role">
+            <generatedKey column="r_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="User" domainObjectName="User">
             <generatedKey column="u_id" sqlStatement="MySql" identity="true"/>
         </table>
+        <table tableName="user_group" domainObjectName="UserGroup">
+            <generatedKey column="group_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="file_permission" domainObjectName="FilePermission"/>
+        <table tableName="menu_permission" domainObjectName="MenuPermission"/>
+        <table tableName="page_permission" domainObjectName="PagePermission"/>
+        <table tableName="permission_operation" domainObjectName="PermissionOperation"/>
+        <table tableName="role_permission" domainObjectName="RolePermission"/>
+        <table tableName="user_group_role" domainObjectName="UserGroupRole"/>
+        <table tableName="user_group_user" domainObjectName="UserGroupUser"/>
+        <table tableName="user_role" domainObjectName="UserRole"/>
     </context>
 </generatorConfiguration>

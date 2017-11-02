@@ -75,7 +75,7 @@ public class HomeHandler extends BaseHandler {
                 }
 
                 userVO.setuId(user.getuId());
-                userVO.setuName(user.getuName());
+                userVO.setuName(user.getUserName());
                 userVO.setAge(user.getAge());
                 userVO.setBirthday(user.getBirthday());
                 userVO.setSex(user.getSex());

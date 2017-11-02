@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.2</version>
+            <version>1.1.5</version>
         </dependency>
         <!--mybatis核心包-->
         <dependency>

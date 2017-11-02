@@ -4,7 +4,6 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
-@Table(name = "t_user")
 public class User {
     /**
      * 主键
@@ -17,9 +16,9 @@ public class User {
     /**
      * 用户名
      */
-    @Column(name = "u_name")
+    @Column(name = "user_name")
     @NotEmpty
-    private String uName;
+    private String userName;
 
     /**
      * 密码
@@ -63,19 +62,19 @@ public class User {
     /**
      * 获取用户名
      *
-     * @return u_name - 用户名
+     * @return user_name - 用户名
      */
-    public String getuName() {
-        return uName;
+    public String getUserName() {
+        return userName;
     }
 
     /**
      * 设置用户名
      *
-     * @param uName 用户名
+     * @param userName 用户名
      */
-    public void setuName(String uName) {
-        this.uName = uName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
@@ -152,13 +151,17 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "uId=" + uId +
-                ", uName='" + uName + '\'' +
-                ", password='" + password + '\'' +
-                ", birthday=" + birthday +
-                ", sex=" + sex +
-                ", age=" + age +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", uId=").append(uId);
+        sb.append(", userName=").append(userName);
+        sb.append(", password=").append(password);
+        sb.append(", birthday=").append(birthday);
+        sb.append(", sex=").append(sex);
+        sb.append(", age=").append(age);
+        sb.append("]");
+        return sb.toString();
     }
 }

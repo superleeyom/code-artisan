@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.artisan.dao.OperationMapper" >
+  <resultMap id="BaseResultMap" type="com.artisan.pojo.db.Operation" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="o_id" property="oId" jdbcType="INTEGER" />
+    <result column="o_name" property="oName" jdbcType="VARCHAR" />
+    <result column="o_code" property="oCode" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>
