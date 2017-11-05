@@ -29,7 +29,7 @@
     - [ ] 前台界面
 
 <p align="center">
-    <img src="http://www.wailian.work/image/MrcwJ4" alt="">
+    <img src="http://s1.wailian.download/2017/11/05/code-artisan.png" alt="">
 </p>
 
 # 前言
@@ -158,7 +158,7 @@ public class ResultBean {
 - DELETE: 删除
     - 请求url：`http://localhost:8080/app/deleteUser/{userId}`
 
-其实关于GET查询这里，如果查询参数在三个以上的话，并不说一定要采用GET请求。我思考了下，这里用POST请求的方式更加合理，post请求参数类型可以为body，也就是用json对象。后台用@RequestBody注解将参数自动解析成查询的实体实例。虽然说不符合RESTful API设计原则，但是我觉得这里的***业务合理性大于设计准则***，因为像京东商城，他们的复杂的查询都是采用都是POST的请求方式，所以到底采用哪种方式，还是得根据业务需求来。
+其实关于GET查询这里，如果查询参数在三个以上的话，并不说一定要采用GET请求。我思考了下，这里用POST请求的方式更加合理，post请求参数类型可以为body，也就是用json对象。后台用@RequestBody注解将参数自动解析成查询的实体实例。虽然说不符合RESTful API设计原则，但是我觉得这里的**业务合理性大于设计准则**，因为像京东商城，他们的复杂的查询都是采用都是POST的请求方式，所以到底采用哪种方式，还是得根据业务需求来。
 
 # API接口文档
 
