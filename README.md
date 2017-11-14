@@ -22,6 +22,7 @@
 - [x] 集成通用Mapper、pagehelper
 - [x] 单点登录，采用JWT实现
 - [x] Hibernate Vilation参数校验机制
+- [ ] 整合zookeeper+dubbo
 
 <p align="center">
     <img src="http://og1m51u2s.bkt.clouddn.com/20171111151040758247575.png" alt="">
