@@ -143,16 +143,19 @@ public class ResultBean {
 
 后台的响应结构已经确定好，那么前端的请求是不是得规范一下呢，答案肯定是的！因为我们采用的是RESTful API设计原则，我们会严格按照约定来使用 HTTP method：
 
+全部采用 **RESTful API** 风格，在采用RESTful的时候，我们会严格按照约定来使用 HTTP method：
+
 - GET: 查询
-    - 若查询参数在3个以下（包含3个），采用如下的请求方式：`http://localhost:8080/app/getUserList?age=12&name=Jack&sex=1`，将参数拼接到url后面。
-    - 若查询参数在三个以上，由于GET请求不可以携带Body，采用如下的请求方式：`http://localhost:8080/app/names?queryDtoStr={"query1":12,"query2":2,"query3":2}`，也就是请求参数通过JSON字符串格式来传递，后台通过fastjson组件解析json字符串。注意这里是单纯的json字符串，不是json对象。当然，为了避免参数中出现 #、？、&等特殊字符，最好是采用 encodeURIComponent对参数进行转义，参见：[Ajax 以GET方式请求时，参数中包含 "#" 特殊字符的处理](http://blog.csdn.net/rainbow702/article/details/52962905)。
+    - 若查询参数在3个以下（包含3个），采用如下的请求方式：`http://localhost:8080/app/getUserList?age=12&name=Jack&sex=1`，将参数拼接到url后面，后台采用@RequestParam注解接收。
+    - 若查询参数在三个以上，这里就采用POST请求，后台用@RequestBody注解将参数自动解析成查询的实体实例。
 - POST: 创建
-    - 请求参数类型为body，也就是json对象，将对应的参数封装成一个类，然后后台使用 @RequestBody注解将参数自动解析成该类的一个实例。
+    - 请求参数类型为body，也就是json对象，将对应的参数封装成一个类，然后后台使用@RequestBody注解将参数自动解析成该类的一个实例。
 - PUT: 修改
-    - 有两个请求参数，第一个更新请求参数，类型为body，json对象，跟POST创建请求一样，只是该json对象只放修改的属性内容。
-    - 第二个主键参数，他的请求url为：`http://localhost:8080/app/updateUser/{userId}`
+    - 第一个主键参数，他的请求url为：`http://localhost:8080/app/updateUser/{userId}`，采用@PathVariable注解接收。
+    - 第二个请求参数，类型为body，json对象，跟POST创建请求一样，只是该json对象只放修改的属性内容，采用@RequestBody注解接收。
 - DELETE: 删除
     - 请求url：`http://localhost:8080/app/deleteUser/{userId}`
+    - 后台采用@PathVariable注解接收参数。
 
 其实关于GET查询这里，如果查询参数在三个以上的话，并不说一定要采用GET请求。我思考了下，这里用POST请求的方式更加合理，post请求参数类型可以为body，也就是用json对象。后台用@RequestBody注解将参数自动解析成查询的实体实例。虽然说不符合RESTful API设计原则，但是我觉得这里的**业务合理性大于设计准则**，因为像京东商城，他们的复杂的查询都是采用都是POST的请求方式，所以到底采用哪种方式，还是得根据业务需求来。
 
