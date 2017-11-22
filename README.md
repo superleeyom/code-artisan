@@ -17,12 +17,11 @@
 - [x] 统一响应结构
 - [x] 统一异常处理
 - [x] CORS跨域请求处理
-- [x] JWT鉴权机制
+- [x] JWT鉴权机制，保证接口安全
 - [x] 集成Swagger2，自动生成restful api文档
-- [x] 集成通用Mapper、pagehelper
-- [x] 单点登录，采用JWT实现
+- [x] 集成通用Mapper、pagehelper分页插件
 - [x] Hibernate Vilation参数校验机制
-- [ ] 整合zookeeper+dubbo
+- [ ] 整合zookeeper+dubbo，将架构重构为基于dubbo的分布式架构
 
 <p align="center">
     <img src="http://og1m51u2s.bkt.clouddn.com/20171111151040758247575.png" alt="">
