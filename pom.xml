@@ -243,10 +243,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
-                    <!--将lib目录可能有的jar包打包进war-->
-                    <compilerArguments>
-                        <extdirs>src\main\webapp\WEB-INF\lib</extdirs>
-                    </compilerArguments>
                 </configuration>
             </plugin>
             <!--MyBatis Generator 插件-->
@@ -273,7 +269,7 @@
                 </dependencies>
             </plugin>
         </plugins>
-        <!--将java/resources目录下的*.xml、*.properties配置文件打包进war -->
+        <!--将java/resources目录下的*.xml、*.properties配置文件打包 -->
         <resources>
             <resource>
                 <directory>src/main/java</directory>
