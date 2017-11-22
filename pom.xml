@@ -233,7 +233,7 @@
     </dependencies>
 
     <build>
-        <finalName>bison-inventory</finalName>
+        <finalName>code-artisan</finalName>
         <plugins>
             <!--编译插件-->
             <plugin>
