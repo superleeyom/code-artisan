@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
-
 /**
  * 平台登录登出
  * @author Leeyom Wang
@@ -94,8 +92,7 @@ public class HomeHandler extends BaseHandler {
 
     /**
      * 登出
-     * @param session
-     * @param userId
+     * @param userId 用户id
      * @return
      */
     @ApiOperation(value = "用户登出", notes = "用户登出")
@@ -105,11 +102,10 @@ public class HomeHandler extends BaseHandler {
     })
     @IgnoreSecurity
     @ResponseBody
-    public ResultBean logout(HttpSession session, @RequestParam(value = "userId") Long userId) {
+    public ResultBean logout(@RequestParam(value = "userId") Long userId) {
         ResultBean resultBean = new ResultBean();
         try {
             tokenManager.deleteToken(userId);
-            session.invalidate();
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
             resultBean.setMsg("Logout failed!");

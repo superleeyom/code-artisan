@@ -1,8 +1,15 @@
 package com.artisan.pojo.db;
 
-import java.util.Date;
-import javax.persistence.*;
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 public class User {
     /**
@@ -17,13 +24,14 @@ public class User {
      * 用户名
      */
     @Column(name = "user_name")
-    @NotEmpty
+    @NotEmpty(message = "姓名不能为空")
     private String userName;
 
     /**
      * 密码
      */
-    @NotEmpty
+    @NotEmpty(message = "密码不能为空")
+    @Length(min = 6, message = "密码长度不能小于 6 位")
     private String password;
 
     /**
@@ -39,11 +47,12 @@ public class User {
     /**
      * 年龄
      */
+    @Max(value = 100, message = "年龄不能大于 100 岁")
+    @Min(value = 18, message = "必须年满 18 岁！")
     private Integer age;
 
     /**
      * 获取主键
-     *
      * @return u_id - 主键
      */
     public Integer getuId() {
@@ -52,7 +61,6 @@ public class User {
 
     /**
      * 设置主键
-     *
      * @param uId 主键
      */
     public void setuId(Integer uId) {
@@ -61,7 +69,6 @@ public class User {
 
     /**
      * 获取用户名
-     *
      * @return user_name - 用户名
      */
     public String getUserName() {
@@ -70,7 +77,6 @@ public class User {
 
     /**
      * 设置用户名
-     *
      * @param userName 用户名
      */
     public void setUserName(String userName) {
@@ -79,7 +85,6 @@ public class User {
 
     /**
      * 获取密码
-     *
      * @return password - 密码
      */
     public String getPassword() {
@@ -88,7 +93,6 @@ public class User {
 
     /**
      * 设置密码
-     *
      * @param password 密码
      */
     public void setPassword(String password) {
@@ -97,7 +101,6 @@ public class User {
 
     /**
      * 获取生日
-     *
      * @return birthday - 生日
      */
     public Date getBirthday() {
@@ -106,7 +109,6 @@ public class User {
 
     /**
      * 设置生日
-     *
      * @param birthday 生日
      */
     public void setBirthday(Date birthday) {
@@ -115,7 +117,6 @@ public class User {
 
     /**
      * 获取性别
-     *
      * @return sex - 性别
      */
     public Integer getSex() {
@@ -124,7 +125,6 @@ public class User {
 
     /**
      * 设置性别
-     *
      * @param sex 性别
      */
     public void setSex(Integer sex) {
@@ -133,7 +133,6 @@ public class User {
 
     /**
      * 获取年龄
-     *
      * @return age - 年龄
      */
     public Integer getAge() {
@@ -142,7 +141,6 @@ public class User {
 
     /**
      * 设置年龄
-     *
      * @param age 年龄
      */
     public void setAge(Integer age) {

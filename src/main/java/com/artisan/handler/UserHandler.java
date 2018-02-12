@@ -6,6 +6,8 @@ import com.artisan.pojo.vo.ResultBean;
 import io.swagger.annotations.*;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -61,14 +63,21 @@ public class UserHandler extends BaseHandler {
     @ApiOperation(value = "新增User")
     @ResponseBody
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResultBean add(@ApiParam(value = "新增User实体", required = true) @RequestBody @Valid User user) {
+    public ResultBean add(@ApiParam(value = "新增User实体", required = true) @RequestBody @Valid User user, BindingResult result) {
         ResultBean resultBean = new ResultBean();
+        StringBuilder errorMsg = new StringBuilder("");
+        if (result.hasErrors()) {
+            List<ObjectError> list = result.getAllErrors();
+            for (ObjectError error : list) {
+                errorMsg = errorMsg.append(error.getCode()).append("-").append(error.getDefaultMessage()).append(";");
+            }
+        }
         try {
             userService.insert(user);
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
-            resultBean.setMsg("Create User Failed！");
-            LOGGER.error("新增User！参数信息：User = " + user.toString(), e);
+            resultBean.setMsg(errorMsg.toString());
+            LOGGER.error("新增User失败！参数信息：User = " + user.toString(), e);
         }
         return resultBean;
     }

@@ -28,7 +28,7 @@ public class RedisTokenManager implements TokenManager {
     private final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMddHHmmss");
 
     @Autowired
-    public void setRedis(RedisTemplate redis) {
+    public void setRedis(RedisTemplate<Long, String> redis) {
         this.redis = redis;
         //泛型设置成Long后必须更改对应的序列化方案
         redis.setKeySerializer(new JdkSerializationRedisSerializer());
@@ -80,17 +80,15 @@ public class RedisTokenManager implements TokenManager {
 
     @Override
     public void deleteToken(long userId) {
-        redis.delete(userId);
+        if (redis.hasKey(userId)) {
+            redis.delete(userId);
+        }
     }
 
     @Override
     public boolean hasToken(long userId) {
         String token = redis.boundValueOps(userId).get();
-        if (StringUtils.notNull(token)) {
-            return true;
-        } else {
-            return false;
-        }
+        return StringUtils.notNull(token);
     }
 
 

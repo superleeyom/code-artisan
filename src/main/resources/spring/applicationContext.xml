@@ -110,7 +110,4 @@
 
     <!--Hibernate Validator-->
     <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
-
-    <!--bean工厂-->
-    <bean id="beanFactoryHelper" class="com.artisan.common.utils.SpringFactory"/>
 </beans>
