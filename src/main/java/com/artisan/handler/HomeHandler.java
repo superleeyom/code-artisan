@@ -61,8 +61,7 @@ public class HomeHandler extends BaseHandler {
             } else {
                 TokenModel token;
                 // 判断用户是否已经登录过，如果登录过，就将redis缓存中的token删除，重新创建新的token值，保证一个用户在一个时间段只有一个可用 Token
-                boolean hasToken = tokenManager.hasToken(user.getuId());
-                if (hasToken) {
+                if (tokenManager.hasToken(user.getuId())) {
                     //清除过时的token
                     tokenManager.deleteToken(user.getuId());
                     //创建token
