@@ -71,12 +71,15 @@ public class UserHandler extends BaseHandler {
             for (ObjectError error : list) {
                 errorMsg = errorMsg.append(error.getCode()).append("-").append(error.getDefaultMessage()).append(";");
             }
+            resultBean.setCode(StatusCode.HTTP_FAILURE);
+            resultBean.setData(errorMsg.toString());
+            return resultBean;
         }
         try {
             userService.insert(user);
         } catch (Exception e) {
             resultBean.setCode(StatusCode.HTTP_FAILURE);
-            resultBean.setMsg(errorMsg.toString());
+            resultBean.setMsg("新增User失败！");
             LOGGER.error("新增User失败！参数信息：User = " + user.toString(), e);
         }
         return resultBean;
