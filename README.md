@@ -34,3 +34,7 @@
 # 详细过程
 
 更加具体的详细过程可以参考我的文章：[《关于前后端分离的思考和总结》](http://www.leeyom.top/2017/11/04/fontend-backend-separation/)，欢迎大家一起探讨！
+
+# 联系方式
+- Email：leeyomwang@qq.com
+- qq：635709492
