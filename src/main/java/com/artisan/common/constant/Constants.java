@@ -22,4 +22,9 @@ public class Constants {
      */
     public static final String DEFAULT_TOKEN_NAME = "Access-Token";
 
+    /**
+     * JWT 加密秘钥
+     */
+    public static final String SECRET_KEY = "57b5f298-3d3a-41ae-b0aa-925be9d57449";
+
 }
